@@ -10,7 +10,8 @@ if "reiniciar" not in st.session_state:
 
 # Botón de reinicio
 if st.button("🔄 Reiniciar flujo"):
-    st.session_state.reiniciar = True
+    for key in list(st.session_state.keys()):
+        del st.session_state[key]
     st.experimental_rerun()
 
 # Diagrama visual
@@ -36,37 +37,4 @@ st.markdown("""
 st.divider()
 st.write("Ingrese el resultado inicial para iniciar el flujo de interpretación.")
 
-# Paso 1: Resultado cuantitativo inicial
-resultado_inicial = st.number_input("Resultado cuantitativo inicial", min_value=0.0, step=0.01, key="resultado_inicial")
-
-if resultado_inicial < 1:
-    st.success("Resultado cuantitativo: NO REACTIVO. ✅ SE EMITE INFORME.")
-else:
-    st.warning("Resultado inicial REACTIVO. Ingrese las repeticiones:")
-
-    # Paso 2: Repeticiones
-    repeticion1 = st.number_input("Repetición 1", min_value=0.0, step=0.01, key="repeticion1")
-    repeticion2 = st.number_input("Repetición 2", min_value=0.0, step=0.01, key="repeticion2")
-
-    if st.button("Evaluar repeticiones"):
-        if repeticion1 < 1 and repeticion2 < 1:
-            st.success("Resultado cualitativo: NO REACTIVO ✅")
-        else:
-            st.error("Resultado cualitativo: REACTIVO ⚠️")
-            st.info("Se requiere confirmación ISP")
-
-            # Paso 3: Confirmación ISP
-            confirmacion_isp = st.selectbox("Resultado confirmación ISP", ["Seleccionar", "Negativo", "Positivo"], key="confirmacion_isp")
-
-            if confirmacion_isp == "Negativo":
-                st.success("Confirmación ISP: NEGATIVO. ✅ EMITIR INFORME.")
-            elif confirmacion_isp == "Positivo":
-                st.warning("Confirmación ISP: POSITIVO. Requiere prueba de identidad.")
-
-                # Paso 4: Prueba de identidad
-                prueba_identidad = st.number_input("Resultado prueba de identidad", min_value=0.0, step=0.01, key="prueba_identidad")
-
-                if prueba_identidad < 1:
-                    st.success("Resultado prueba de identidad: NO REACTIVO ✅")
-                else:
-                    st.error("Resultado prueba de identidad: REACTIVO ⚠️")
+# Paso 1: Resultado cuantitativo 
