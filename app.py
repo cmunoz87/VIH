@@ -72,7 +72,7 @@ else:
 
                 if prueba_identidad > 0:
                     if prueba_identidad < 1:
-                        st.warning("Resultado prueba de identidad: NO REACTIVO ⚠️. Revisar todo el proceso antes de emitir informe.")
+                        st.warning("Resultado prueba de identidad: NO REACTIVO ⚠️. Revisar todo el proceso, no  emitir informe.")
                     else:
-                        st.error("Resultado prueba de identidad: REACTIVO 🔴. Confirmar diagnóstico.")
+                        st.error("Resultado prueba de identidad: REACTIVO 🔴. emitir informe.")
 
